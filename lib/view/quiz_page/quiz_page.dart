@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:quiz_app/utils/color_constant.dart';
 import 'package:quiz_app/utils/question_db.dart';
+import 'package:quiz_app/view/question_screen/question_screen.dart';
 import 'package:quiz_app/view/result_screen/result_screen.dart';
 
-class QuestionScreen extends StatefulWidget {
+class QuestionPage extends StatefulWidget {
   final int? selectedCategoryIndex;
 
-  const QuestionScreen({Key? key, this.selectedCategoryIndex})
-      : super(key: key);
+  const QuestionPage({Key? key, this.selectedCategoryIndex}) : super(key: key);
 
   @override
-  State<QuestionScreen> createState() => _QuestionScreenState();
+  State<QuestionPage> createState() => _QuestionPageState();
 }
 
-class _QuestionScreenState extends State<QuestionScreen> {
+class _QuestionPageState extends State<QuestionPage> {
   int questionIndex = 0;
   int? selectedIndex;
   int count = 0;

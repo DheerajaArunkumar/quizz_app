@@ -1,54 +1,114 @@
-/import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:quiz_app/utils/color_constant.dart';
+import 'package:quiz_app/utils/question_db.dart';
+import 'package:quiz_app/view/home_screen/home_screen.dart';
 
-class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key});
+class ResultScreen extends StatefulWidget {
+  final int count;
+  final int correctAnswers;
+  final int wrongAnswers;
+  final int skippedCount;
+
+  ResultScreen({
+    required this.count,
+    required this.correctAnswers,
+    required this.wrongAnswers,
+    required this.skippedCount,
+  });
 
   @override
+  State<ResultScreen> createState() => _ResultScreenState();
+}
+
+class _ResultScreenState extends State<ResultScreen> {
+  @override
   Widget build(BuildContext context) {
+    int totalQuestions = Questiondb.literaturequestion.length;
+    double percentage = (widget.count / totalQuestions) * 100;
+
     return Scaffold(
       backgroundColor: ColorConstant.myCoustomBlack,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               "Congrats!",
               style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                  color: ColorConstant.myCoustomWhite),
+                color: ColorConstant.myCoustomWhite,
+                fontSize: 30,
+              ),
             ),
             Text(
-              "90% Score",
+              '  ${percentage.toStringAsFixed(0)}% score',
               style: TextStyle(
-                  fontSize: 45,
-                  fontWeight: FontWeight.w500,
-                  color: ColorConstant.myCoustomGreen),
+                fontWeight: FontWeight.bold,
+                color: ColorConstant.myCoustomGreen,
+                fontSize: 40,
+              ),
+              textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: 50,
+              height: 20,
+            ),
+            Text(
+              'Correct Answers: ${widget.correctAnswers}',
+              style: TextStyle(
+                color: ColorConstant.myCoustomWhite,
+                fontSize: 20,
+              ),
+            ),
+            Text(
+              'Wrong Answers: ${widget.wrongAnswers}',
+              style: TextStyle(
+                color: ColorConstant.myCoustomWhite,
+                fontSize: 20,
+              ),
+            ),
+            Text(
+              'Skipped: ${widget.skippedCount}',
+              style: TextStyle(
+                color: ColorConstant.myCoustomWhite,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 30,
             ),
             InkWell(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(),
+                  ),
+                );
               },
               child: Container(
-                width: 250,
-                height: 60,
+                height: 50,
+                width: 120,
                 child: Center(
-                    child: Text(
-                  "Restart",
-                  style: TextStyle(color: ColorConstant.myCoustomWhite),
-                )),
+                  child: Text(
+                    'Restart',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: ColorConstant.myCoustomWhite,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 decoration: BoxDecoration(
-                    color: ColorConstant.myCoustomOrange,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        color: ColorConstant.myCoustomWhite, width: 2)),
+                  color: ColorConstant.myCoustomBlue,
+                  border: Border.all(
+                    color: ColorConstant.myCoustomWhite,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

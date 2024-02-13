@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/view/question_screen/question_screen.dart';
+import 'package:quiz_app/view/home_screen/home_screen.dart';
 
-void main() {
+main() {
   runApp(MyApp());
 }
 
@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: QuestionScreen(),
+      // home: QuestionScreen(),
+      home: HomePage(),
     );
   }
 }
